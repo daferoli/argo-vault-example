@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-argo-app
+  namespace: vplugindemo
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/daferoli/argo-vault-example.git
+    targetRevision: HEAD
+    path: test
+    plugin:
+      name: argocd-vault-plugin
+  
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: vplugindemo
